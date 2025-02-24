@@ -28,3 +28,19 @@ def deletar_func(request, id):
     funcionario.delete()
 
     return redirect('cadastrar_func')
+
+
+def atualizar_func(request, id):
+
+    nome = request.POST.get('nome')
+    funcao = request.POST.get('funcao')
+    sexo = request.POST.get('sexo')
+    email = request.POST.get('email')
+
+    funcionario = get_object_or_404(Funcionario, id=id)
+    funcionario.nome = nome
+    funcionario.funcao = funcao
+    funcionario.sexo = sexo
+    funcionario.email = email
+    funcionario.save()
+    return redirect('cadastrar_func')

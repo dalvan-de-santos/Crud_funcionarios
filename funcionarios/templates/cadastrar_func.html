@@ -37,17 +37,23 @@
                 <th scope="col">Função</th>
                 <th scope="col">Sexo</th>
                 <th scope="col">Email</th>
+                <th scope="col">Atualizar</th>
                 <th escope="col">Deletar</th>
               </tr>
             </thead>
             <tbody>
             {% for i in funcionarios %}
               <tr>
-                <td>{{ i.nome }}</td>
-                <td>{{ i.funcao }}</td>
-                <td>{{ i.sexo }}</td>
-                <td>{{ i.email }}</td>
-                <td><a class="btn btn-danger" href="{% url 'deletar_func' i.id %}">Apagar</a></td>
+                <form action="{% url 'atualizar_func' i.id %}" method="post">
+                  {% csrf_token %}
+                  <td><input type="text" value="{{ i.nome }}" name="nome"></td>
+                  <td><input type="text" value="{{ i.funcao }}" name="funcao"></td>
+                  <td><input type="text" value="{{ i.sexo }}" name="sexo"></td>
+                  <td><input type="text" value="{{ i.email }}" name="email"></td>
+                  <td><input type="submit" value="Atualizar"></td>
+                </form>
+                  <td><a class="btn btn-danger" href="{% url 'deletar_func' i.id %}">Apagar</a></td>
+                
               </tr>
             {% endfor %}
               
